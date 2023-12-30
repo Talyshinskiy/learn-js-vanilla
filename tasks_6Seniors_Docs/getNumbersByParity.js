@@ -26,23 +26,16 @@ const getNumbersByParity = (data, parity) => {
 console.log(getNumbersByParity(data, "even")); // [2, 4, 6];
 console.log(getNumbersByParity(data, "odd")); // [1, 3, 5];`
 
-
-// option 2
+// option 2 filter
 const getNumbersByParity2 = (data, parity) => {
-  let newArr = [];
-  for (let i = 0; i < data.length; i++) {
+  return data.filter((number) => {
     if (parity === "even") {
-      if (data[i] % 2 === 0) {
-        newArr.push(data[i]);
-      }
-    } else if (parity === "odd") {
-      if (data[i] % 2 !== 0) {
-        newArr.push(data[i]);
-      }
+      return number % 2 === 0;
+    } else {
+      return number % 2 !== 0;
     }
-  }
-  return newArr;
+  });
 };
 
-console.log(getNumbersByParity(data, "even")); // [2, 4, 6];
-console.log(getNumbersByParity(data, "odd")); // [1, 3, 5];`
+console.log(getNumbersByParity2(data, "even")); // [2, 4, 6];
+console.log(getNumbersByParity2(data, "odd")); // [1, 3, 5];`
