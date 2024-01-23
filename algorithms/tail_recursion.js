@@ -68,7 +68,7 @@ function sumOfArrayTailRec(arr, index, accumulator){
   if(index === arr.length){
     return accumulator
   }
-  return sumOfArrayTailRec(arr, index + 1, accumulator + arr[index])
+return sumOfArrayTailRec(arr, index + 1, accumulator + arr[index])
 }
 
 const numberArray = [1, 2, 3, 4, 5];
