@@ -93,22 +93,25 @@ function multiplyNumeric(obj) {
 }
 console.log(multiplyNumeric(menu));
 
-const a = {
-  a: 1,
-};
-const b = {
-  a: 1,
-};
-console.log(a == b);
-console.log();
-// --------------------------------
+// -----------------------------------------
+const a = { a: 1 };
+const b = { a: 1 };
+console.log(a === b); // false
+
 const target = { a: 1, b: 2 };
 const source = { b: 4, c: 5 };
 
 const returnedTarget = Object.assign(target, source);
 
-console.log(target);
+console.log(target, returnedTarget);
 // Expected output: Object { a: 1, b: 4, c: 5 }
-console.log(1, returnedTarget);
-console.log(returnedTarget === target);
-// Expected output: true
+
+console.log(returnedTarget === target); // почему true ???
+
+// -----------------------------------------
+
+const aboba = {
+  a: 123,
+};
+const cloneAboba = { ...aboba };
+console.log(cloneAboba, aboba === cloneAboba);
