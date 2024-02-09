@@ -10,7 +10,7 @@ function makeUser() {
 
 let user = makeUser();
 // alert(user.ref.name);
-// Каким будет результат? undefined ? потому что она вызываеться как функция а не точенный метод
+// Каким будет результат? undefined ? потому что она вызываеться как функция а не точечнный метод
 function newMakeUser() {
   return {
     name: "BAHAHAHAH",
