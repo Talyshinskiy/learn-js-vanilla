@@ -236,8 +236,9 @@ console.log(Array.isArray([]), isArray); // true
 // Array.isArray(arr) проверяет, является ли arr массивом.
 // Пожалуйста, обратите внимание, что методы push, pop, shift, unshift, sort, reverse и splice изменяют исходный массив.
 
-//tasks
-//--------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------
+//--------------------------------------------------tasks--------------------------------------------------
+//---------------------------------------------------------------------------------------------------------
 
 // Напишите функцию camelize(str), которая преобразует строки вида «my-short-string» в «myShortString».
 // То есть дефисы удаляются, а все слова после них получают заглавную букву.
@@ -298,3 +299,214 @@ let arr22 = [5, 2, 1, -10, 8];
 arr22.sort((a, b) => b - a);
 
 console.log(arr22); // 8, 5, 2, 1, -10
+
+//--------------------------------------------------------------------------
+// У нас есть массив строк arr. Нужно получить отсортированную копию, но оставить arr неизменённым.
+// Создайте функцию copySorted(arr), которая будет возвращать такую копию.
+
+let arr23 = ["HTML", "JavaScript", "CSS"];
+
+function copySorted(arr) {
+  let copy = arr.slice();
+  return copy.sort();
+}
+
+let sorted = copySorted(arr23);
+
+console.log(sorted); // CSS, HTML, JavaScript
+console.log(arr23); // HTML, JavaScript, CSS (без изменений)
+
+//--------------------------------------------------------------------------
+// Создайте функцию конструктор Calculator, которая создаёт «расширяемые» объекты калькулятора.
+function Calculator() {
+  this.methods = {
+    "-": (a, b) => a - b,
+    "+": (a, b) => a + b,
+  };
+  this.calculate = function (str) {
+    let split = str.split(" ");
+    (a = +split[0]), (operator = split[1]), (b = +split[2]);
+
+    if (!this.methods[operator] || isNaN(a) || isNaN(b)) {
+      return NaN;
+    }
+    return this.methods[operator](a, b);
+  };
+  this.addMethod = function (name, func) {
+    this.methods[name] = func;
+  };
+}
+
+let powerCalc = new Calculator();
+powerCalc.addMethod("*", (a, b) => a * b);
+powerCalc.addMethod("/", (a, b) => a / b);
+powerCalc.addMethod("**", (a, b) => a ** b);
+
+let result12 = powerCalc.calculate("2 ** 3");
+console.log(result12); // 8
+
+//--------------------------------------------------------------------------
+// У вас есть массив объектов user, и в каждом из них есть user.name.
+// Напишите код, который преобразует их в массив имён.
+
+let vasya = { name: "Вася", age: 25, status: false };
+let petya = { name: "Петя", age: 30, status: true };
+let masha = { name: "Маша", age: 28, status: false };
+
+let users1 = [vasya, petya, masha];
+
+let names1 = users1.map((user) => user.name);
+let age = users1.map((user) => user.age);
+let status1 = users1.map((user) => user.status);
+
+console.log(names1, status1, Array.isArray(age)); // Вася, Петя, Маша
+
+//--------------------------------------------------------------------------
+
+// У вас есть массив объектов user, и у каждого из объектов есть name, surname и id.
+// Напишите код, который создаст ещё один массив объектов с параметрами id и fullName,
+// где fullName – состоит из name и surname.
+
+let vasya1 = { name: "Вася", surname: "Пупкин", id: 1 };
+let petya1 = { name: "Петя", surname: "Иванов", id: 2 };
+let masha1 = { name: "Маша", surname: "Петрова", id: 3 };
+
+let users2 = [vasya1, petya1, masha1];
+
+let usersMapped = users2.map((user) => ({
+  fullName: user.name + " " + user.surname,
+  id: user.id,
+}));
+
+/*
+usersMapped = [
+  { fullName: "Вася Пупкин", id: 1 },
+  { fullName: "Петя Иванов", id: 2 },
+  { fullName: "Маша Петрова", id: 3 }
+]
+*/
+
+console.log(usersMapped[0].id); // 1
+console.log(usersMapped[0].fullName); // Вася Пупкин
+
+//--------------------------------------------------------------------------
+// Напишите функцию sortByAge(users), которая принимает массив объектов со свойством age и сортирует их по нему.
+
+let vasya2 = { name: "Вася", age: 25 };
+let petya2 = { name: "Петя", age: 30 };
+let masha2 = { name: "Маша", age: 28 };
+
+let arr24 = [vasya2, petya2, masha2];
+
+function sortByAge(users) {
+  users.sort((a, b) => (a.age > b.age ? 1 : -1));
+}
+
+sortByAge(arr24);
+
+// теперь: [vasya, masha, petya]
+console.log(arr24[0].name); // Вася
+console.log(arr24[1].name); // Маша
+console.log(arr24[2].name); // Петя
+
+//--------------------------------------------------------------------------
+// Напишите функцию shuffle(array), которая перемешивает (переупорядочивает случайным образом) элементы массива.
+// Многократные прогоны через shuffle могут привести к разным последовательностям элементов. Например:
+
+let arr25 = [1, 2, 3];
+
+function shuffle(arr) {
+  arr.sort((a, b) => Math.random() - (a + b));
+}
+
+shuffle(arr25);
+console.log(arr25);
+shuffle(arr25);
+console.log(arr25);
+shuffle(arr25);
+console.log(arr25);
+shuffle(arr25);
+console.log(arr25);
+shuffle(arr25);
+console.log(arr25);
+shuffle(arr25);
+console.log(arr25);
+shuffle(arr25);
+console.log(arr25);
+
+//--------------------------------------------------------------------------
+// Напишите функцию getAverageAge(users), которая принимает массив объектов со свойством age и возвращает средний возраст.
+// Формула вычисления среднего арифметического значения: (age1 + age2 + ... + ageN) / N.
+
+let vasya3 = { name: "Вася", age: 25 };
+let petya3 = { name: "Петя", age: 30 };
+let masha3 = { name: "Маша", age: 29 };
+
+let arr26 = [vasya3, petya3, masha3];
+
+function getAverageAge(users) {
+  return users.reduce((cur, user) => cur + user.age, 0) / users.length;
+}
+
+console.log(getAverageAge(arr26)); // (25 + 30 + 29) / 3 = 28
+
+//--------------------------------------------------------------------------
+// Пусть arr – массив строк.
+// Напишите функцию unique(arr), которая возвращает массив, содержащий только уникальные элементы arr.
+
+function unique(arr) {
+  let uniqueObj = {};
+  let result = [];
+  for (const name of arr) {
+    if (!uniqueObj[name]) {
+      result.push(name);
+      uniqueObj[name] = true;
+    }
+  }
+  return result;
+}
+
+let strings = [
+  "кришна",
+  "Bah",
+  "кришна",
+  "харе",
+  "харе",
+  "харе",
+  "харе",
+  "кришна",
+  "кришна",
+  ":-O",
+];
+
+console.log(unique(strings)); // кришна, харе, :-O
+
+//--------------------------------------------------------------------------
+// Допустим, мы получили массив пользователей в виде {id:..., name:..., age:... }.
+// Создайте функцию groupById(arr), которая создаст из него объект с id в качестве ключа и элементами массива в качестве значений.
+
+function groupById(arr) {
+  return arr.reduce((cur, user) => {
+    cur[user.id] = user;
+    return cur;
+  }, {});
+}
+
+let users12 = [
+  { id: "john", name: "John Smith", age: 20 },
+  { id: "ann", name: "Ann Smith", age: 24 },
+  { id: "pete", name: "Pete Peterson", age: 31 },
+];
+
+let usersById = groupById(users12);
+
+console.log(usersById);
+/*
+// после вызова у нас должно получиться:
+
+usersById = {
+  john: {id: 'john', name: "John Smith", age: 20},
+  ann: {id: 'ann', name: "Ann Smith", age: 24},
+  pete: {id: 'pete', name: "Pete Peterson", age: 31},
+}
+*/
