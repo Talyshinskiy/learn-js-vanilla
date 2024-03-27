@@ -65,7 +65,7 @@ meetup.self = meetup;
 console.log(
   JSON.stringify(meetup, function replacer(key, value) {
     /* ваш код */
-    return (key != "" && value == meetup) ? undefined : value;
+    return key != "" && value == meetup ? undefined : value;
   })
 );
 
@@ -76,3 +76,10 @@ console.log(
   "place":{"number":23}
 }
 */
+
+// console.log(typeof null typeof undefined)
+
+const obj = {};
+const arr = [];
+
+console.log(({} = arr), ([] = obj));
